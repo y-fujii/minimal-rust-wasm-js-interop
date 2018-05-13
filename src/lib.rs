@@ -1,4 +1,4 @@
-use std::*;
+// public domain.
 use std::fmt::Write;
 
 
@@ -8,8 +8,8 @@ extern {
 
 struct JsConsole;
 
-impl fmt::Write for JsConsole {
-	fn write_str( &mut self, s: &str ) -> Result<(), fmt::Error> {
+impl std::fmt::Write for JsConsole {
+	fn write_str( &mut self, s: &str ) -> Result<(), std::fmt::Error> {
 		unsafe { console_log_raw_str( s.as_ptr(), s.len() ) };
 		Ok( () )
 	}

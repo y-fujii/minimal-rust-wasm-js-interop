@@ -1,24 +1,26 @@
 <!doctype html>
 <script>
+	// public domain.
 	"use strict";
 
 	const utf8_decoder = new TextDecoder( "utf-8" );
+	let heap_u8 = null;
 	let exports = null;
 	let imports = {
 		env: {
 			console_log_raw_str: function( ptr, len ) {
-				let mem_u8 = new Uint8Array( exports.memory.buffer );
-				let str = utf8_decoder.decode( mem_u8.subarray( ptr, ptr + len ) );
+				const str = utf8_decoder.decode( heap_u8.subarray( ptr, ptr + len ) );
 				console.log( str );
 			},
 		}
 	};
 
-	fetch( "wvr.wasm" )
+	fetch( "minimal_rust_wasm_js_interop.wasm" )
 		.then( e => e.arrayBuffer() )
 		.then( e => WebAssembly.instantiate( e, imports ) )
 		.then( e => {
 			exports = e.instance.exports;
+			heap_u8 = new Uint8Array( exports.memory.buffer );
 			exports.main();
 		} );
 </script>

@@ -1,1 +1,9 @@
-Minimal Rust-WASM-JavaScript interop example.
+= Minimal Rust-WASM-JavaScript interop example
+
+== Build & run
+
+----
+$ cargo build --target=wasm32-unknown-unknown
+$ cp target/wasm32-unknown-unknown/debug/minimal_rust_wasm_js_interop.wasm html/
+$ # open "html/index.html" in a web browser.
+----
