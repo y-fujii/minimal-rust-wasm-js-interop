@@ -1,0 +1,13 @@
+[package]
+name = "minimal-rust-wasm-js-interop"
+version = "0.1.0"
+authors = ["Yasuhiro Fujii <y-fujii@mimosa-pudica.net>"]
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+panic = "abort"
+lto = true
+codegen-units = 1
+incremental = false
